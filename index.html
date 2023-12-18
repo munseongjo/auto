@@ -2,238 +2,248 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>크리스마스 이벤트</title>
-    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Gowun Dodum', serif;
-            text-align: center;
-            margin-top: 18px;
-            background-color: transparent;
-            align-items: center;
-            justify-content: center;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>크리스마스 이벤트</title>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Gowun Dodum', serif;
+      text-align: center;
+      margin-top: 18px;
+      background-color: transparent;
+      align-items: center;
+      justify-content: center;
+    }
 
-        .high {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-            height: 55px;
-            width: 357px;
-            background-color: #ffbfffb8;
-            letter-spacing: -2px;
-            font-size: 22px;
-            line-height: 28px;
-            color: #3a2733;
-            opacity: 0.8;
-            border-radius: 0px;
-            white-space: nowrap;
-            overflow: hidden;
-        }
+    .high {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      height: 55px;
+      width: 357px;
+      background-color: #ffbfffb8;
+      letter-spacing: -2px;
+      font-size: 22px;
+      line-height: 28px;
+      color: #3a2733;
+      opacity: 0.8;
+      border-radius: 0px;
+      white-space: nowrap;
+      overflow: hidden;
+    }
 
-        .center-container {
-            display: flex;
-            align-items: top;
-            justify-content: center;
-            height: 380px;
-            margin-top: 0px;
-        }
+    .center-container {
+      display: flex;
+      align-items: top;
+      justify-content: center;
+      height: 380px;
+      margin-top: 0px;
+    }
 
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(6, 57px);
-            gap: 3px;
-            align-items: center;
-            justify-content: center;
-            border-radius: 0px;
-            background: url('your.png');
-            background-size: 75%;
-            background-repeat: no-repeat;
-            background-position: center;
-            position: relative;
-            opacity: 0.9;
-            margin-top: 0px;
-        }
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(6, 57px);
+      gap: 3px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0px;
+      background: url('your.png');
+      background-size: 75%;
+      background-repeat: no-repeat;
+      background-position: center;
+      position: relative;
+      opacity: 0.9;
+      margin-top: 0px;
+    }
 
-        .grid-item {
-            border: 0px solid #ddd;
-            width: 55px;
-            height: 65px;
-            font-size: 26px;
-            cursor: pointer;
-            display: flex;
-            align-items: top;
-            justify-content: center;
-            position: relative;
-            perspective: 1000px;
-            overflow: hidden;
-            opacity: 1.0;
-            word-break: keep-all;
-            cursor: pointer;
-            border-radius: 5px;
-        }
+    .grid-item {
+      border: 0px solid #ddd;
+      width: 55px;
+      height: 65px;
+      font-size: 26px;
+      cursor: pointer;
+      display: flex;
+      align-items: top;
+      justify-content: center;
+      position: relative;
+      perspective: 1000px;
+      overflow: hidden;
+      opacity: 1.0;
+      word-break: keep-all;
+      cursor: pointer;
+      border-radius: 5px;
+    }
 
-        .card {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            transform-style: preserve-3d;
-            transition: transform 0.5s ease-in-out;
-            align-items: center;
-            justify-content: center;
-            background-color: transparent;
-            opacity: 1.0;
-        }
+    .grid-item:nth-child(even) {
+      transform: translateY(20px);
+    }
 
-        .card.flipped {
-            transform: rotateY(180deg);
-            opacity: 1.0;
-        }
+    .card {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      transform-style: preserve-3d;
+      transition: transform 1.5s ease-in-out, opacity 0.0s ease-in-out;
+      align-items: center;
+      justify-content: center;
+      background-color: transparent;
+      opacity: 1.0;
 
-        .front,
-        .back {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            backface-visibility: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 1.0;
+    }
+    .front{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1.0;
+//  visibility: visible; /* 수정된 부분 */
+}
+.back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1.0;
+  visibility: hidden; /* 수정된 부분 */
 
-        }
 
-        .front img {
-            width: 100%;
-            height: 100%;
-        }
+}
+    .card.flipped {
+      transform: rotateY(540deg);
+	    visibility: visible; /* 수정된 부분 */
 
-        .card img {
-            width: 100%;
-            height: 100%;
-           
-        }
+    }
 
-        .back img {
-            width: 100%;
-            height: 100%;
-			display: none;
-        }
 
-        .back.winner img{
-            width: 100%;
-            height: 100%;
-            display: none; /* 당첨 시에 이미지 나타내기 */
-        }
 
-        .unclickable {
-            pointer-events: none;
-            opacity: 0.5;
-            cursor: default;
-        }
-
-        .grid-item:nth-child(odd) {
-            transform: translateY(30px);
-        }
-    </style>
+.card.flipped .front {
+  visibility: visible; /* 추가된 부분: 플립된 후에 보이도록 설정 */
+  transform: rotateY(0deg);
+}
+.card.flipped .back {
+  visibility: visible; /* 추가된 부분: 플립된 후에 보이도록 설정 */
+  transform: rotateY(540deg);
+}
+  </style>
 </head>
 
 <body>
-    <div class="high">
-        <p>
-            🧡 크리스마스 이벤트 🧡 <br> 도레미파 솔라시도
-        </p>
-    </div>
-    <div class="center-container">
-        <div class="grid-container" id="gridContainer"></div>
-    </div>
-    <p id="result"></p>
+  <div class="high">
+    <p>
+      🧡 크리스마스 🧡 <br> 꽝 없는 트리 뽑기
+    </p>
+  </div>
+  <div class="center-container">
+    <div class="grid-container" id="gridContainer"></div>
+  </div>
+  <p id="result"></p>
 
-    <script>
-var gridContainer = document.getElementById("gridContainer");
+  <script>
+    var 당첨숫자들 = [];
+    var 선택된칸들 = [];
 
-// 일반적인 이미지 배열
-var cardImages = ["0.png", "0.png", "001.png", "002.png", "0.png", "0.png", "0.png", "0.png", "003.png", "004.png", "0.png", "0.png", "0.png", "005.png", "006.png", "007.png", "008.png", "0.png", "0.png", "009.png", "010.png", "011.png", "012.png", "0.png", "0.png", "013.png", "014.png", "015.png", "016.png", "0.png", /* ... 추가 내용 ... */];
-
-var cardResults = ["0.png", "0.png", "01.png", "02.png", "0.png", "0.png", "0.png", "0.png", "03.png", "04.png", "0.png", "0.png", "0.png", "05.png", "06.png", "07.png", "08.png", "0.png", "0.png", "09.png", "10.png", "11.png", "12.png", "0.png", "0.png", "13.png", "14.png", "15.png", "16.png", "0.png", /* ... 추가 내용 ... */];
-
-
-
-function 칸클릭(칸번호) {
-    if (선택된칸들.includes(칸번호)) {
+    function 칸클릭(칸번호) {
+      if (선택된칸들.includes(칸번호)) {
         return;
-    }
+      }
 
-    선택된칸들.push(칸번호);
-    var gridItem = document.getElementById("gridItem_" + 칸번호);
+      선택된칸들.push(칸번호);
+      var gridItem = document.getElementById("gridItem_" + 칸번호);
 
-    if (!gridItem) {
+      if (!gridItem) {
         console.error(`칸번호 ${칸번호}에 해당하는 gridItem을 찾을 수 없습니다.`);
         return;
-    }
+      }
 
-    var card = gridItem.querySelector('.card');
-    card.classList.add('flipped');
+      var card = gridItem.querySelector('.card');
 
-    // 결과 텍스트 가져오기
-    var 결과텍스트 = cardResults[칸번호 - 1];
+      if (!card) {
+        console.error(`칸번호 ${칸번호}에 해당하는 card를 찾을 수 없습니다.`);
+        return;
+      }
 
-    // 이미지 표시 코드 수정
-    var back = gridItem.querySelector('.back img');
-    back.style.display = "none";
-    back.src = 결과텍스트;
-    playSound('win.mp3');
+   // 플립 소리 재생
+  playFlipSound();
 
-    if (당첨숫자들.length === 30) {
+  card.classList.add('flipped');
+
+      // 결과 텍스트 가져오기
+      var 결과텍스트 = cardResults[칸번호 - 1];
+
+      if (당첨숫자들.length === 30) {
         document.querySelectorAll('.grid-item').forEach(function (item) {
-            item.removeAttribute('onclick');
+          item.removeAttribute('onclick');
         });
-    } else {
-        // 클릭한 카드 이외의 모든 카드를 초기 이미지로 설정
-
+      }
     }
-}
 
-for (var i = 1; i <= cardImages.length; i++) {
-    var gridItem = document.createElement("div");
-    gridItem.id = "gridItem_" + i;
-    gridItem.className = "grid-item";
+    var gridContainer = document.getElementById("gridContainer");
+    var cardImages = ["0.png", "0.png", "1.png", "2.png", "0.png", "0.png", "0.png", "0.png", "3.png", "4.png", "0.png", "0.png", "0.png", "5.png", "6.png", "7.png", "8.png", "0.png", "0.png", "9.png", "10.png", "11.png", "12.png", "0.png", "0.png", "13.png", "14.png", "15.png", "16.png", "0.png"];
+    var cardResults = ["21.png", "22.png", "21.png", "22.png", "23.png", "24.png", "25.png", "26.png", "23.png", "24.png", "32.png", "33.png", "34.png", "25.png", "26.png", "27.png", "28.png", "27.png", "28.png", "29.png", "30.png", "31.png", "32.png", "29.png", "30.png", "33.png", "34.png", "35.png", "36.png", "31.png"];
 
-    var card = document.createElement("div");
-    card.className = "card";
+    var randomOrder = Array.from(cardResults).sort(() => Math.random() - 0.5);
+    for (var i = 1; i <= cardImages.length; i++) {
+      var gridItem = document.createElement("div");
+      gridItem.id = "gridItem_" + i;
+      gridItem.className = "grid-item";
 
-    var front = document.createElement("img");
-    front.className = "front";
-    front.src = cardImages[i - 1];
+      var card = document.createElement("div");
+      card.className = "card";
 
-    var back = document.createElement("img");
-    back.className = "back";
-    back.src = cardResults[i - 1];
-    back.style.display = "none";
+      var front = document.createElement("img");
+      front.className = "front";
+      front.src = cardImages[i - 1];
 
-    card.appendChild(front);
-    card.appendChild(back);
+      var back = document.createElement("img");
+      back.className = "back";
+      back.src = cardResults[i - 1];
+ //     back.style.transform = "scaleX(-1)";
 
-    gridItem.appendChild(card);
+      // 특정 그리드 아이템에 항상 '0.png' 설정
+      if ([1, 2, 5, 6, 7, 8, 11, 12, 13, 18, 19, 24, 25, 30].includes(i)) {
+        back.src = '0.png';
+      } else {
+        // 그 외의 경우 랜덤한 이미지 설정
+        back.src = randomOrder[i - 1];
+      }
 
-    // 클릭 가능한지 여부 설정
-    if (i === 1 || i === 2 || i === 5 || i === 6 || i === 7 || i === 8 || i === 11 || i === 12 || i === 13 || i === 18 || i === 19 || i === 24 || i === 25 || i === 30) {
+      card.appendChild(front);
+      card.appendChild(back);
+      gridItem.appendChild(card);
+
+      if ([1, 2, 5, 6, 7, 8, 11, 12, 13, 18, 19, 24, 25, 30].includes(i)) {
         gridItem.classList.add("unclickable");
-    } else {
+      } else {
         gridItem.setAttribute("onclick", "칸클릭(" + i + ")");
+      }
+
+      gridContainer.appendChild(gridItem);
     }
 
-    gridContainer.appendChild(gridItem);
-}
+    document.querySelectorAll('.card').forEach(function (card) {
+      card.addEventListener('transitionend', function () {
+        if (card.classList.contains('flipped')) {
+          card.querySelector('.back').style.visibility = 'visible';
+        }
+      }, {
+        once: true
+      });
+    });
 
-function playSound(soundFile) {
-    var audio = new Audio(soundFile);
-    audio.play();
-}
-    </script>
+function playFlipSound() {
+  // 플립 소리 파일 경로
+  var flipSoundFile = 'yes.mp3'; // 적절한 경로로 변경
+  var audio = new Audio(flipSoundFile);
+  audio.play();
+}  </script>
 </body>
 
 </html>
