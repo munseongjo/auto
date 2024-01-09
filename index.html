@@ -1,252 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>크리스마스 이벤트</title>
-  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+  <title>슬롯머신</title>
   <style>
-    body {
-      font-family: 'Gowun Dodum', serif;
-      text-align: center;
-      margin-top: 18px;
-      background-color: transparent;
-      align-items: center;
-      justify-content: center;
+    @keyframes spin {
+      0% { transform: translateY(0px); }
+      8.33% { transform: translateY(-100px); }
+      16.67% { transform: translateY(-200px); }
+      25% { transform: translateY(-300px); }
+      33.33% { transform: translateY(-400px); }
+      41.67% { transform: translateY(-500px); }
+      50% { transform: translateY(-600px); }
+      58.33% { transform: translateY(-700px); }
+      66.67% { transform: translateY(-800px); }
+      75% { transform: translateY(-900px); }
+      83.33% { transform: translateY(-1000px); }
+      91.67% { transform: translateY(-1100px); }
+      100% { transform: translateY(-1200px); } 
     }
 
-    .high {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .slot {
+      width: 100px;
+      height: 100px;
+      overflow: hidden;
+      border: 1px solid #ccc;
+      position: relative;
       margin: 0 auto;
-      height: 55px;
-      width: 250px;
-      background-color: #ffbfffb8;
-      letter-spacing: -2px;
-      font-size: 22px;
-      line-height: 28px;
-      color: #3a2733;
-      opacity: 0.8;
-      border-radius: 0px;
-      white-space: nowrap;
+    }
+
+    .reel-container {
+      height: 100px;
       overflow: hidden;
-    }
-
-    .center-container {
-      display: flex;
-      align-items: top;
-      justify-content: center;
-      height: 380px;
-      margin-top: 0px;
-    }
-
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(6, 57px);
-      gap: 3px;
-      align-items: center;
-      justify-content: center;
-      border-radius: 0px;
-      background: url('your.png');
-      background-size: 75%;
-      background-repeat: no-repeat;
-      background-position: center;
-      position: relative;
-      opacity: 0.9;
-      margin-top: 0px;
-    }
-
-    .grid-item {
-      border: 0px solid #ddd;
-      width: 55px;
-      height: 65px;
-      font-size: 26px;
-      cursor: pointer;
-      display: flex;
-      align-items: top;
-      justify-content: center;
-      position: relative;
-      perspective: 35px;
-      overflow: hidden;
-      opacity: 1.0;
-      word-break: keep-all;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-
-    .grid-item:nth-child(even) {
-      transform: translateY(20px);
-      transform: translateY(10px);
-    }
-
-    .card {
-      width: 55px;
-      height: 65px;
       position: absolute;
-      transform-style: preserve-3d;
-      transition: transform 1.5s ease-in-out, opacity 0.0s ease-in-out;
-      align-items: center;
-      justify-content: center;
-      background-color: transparent;
-      opacity: 1.0;
-
-    }
-    .front{
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  backface-visibility: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 1.0;
-//  visibility: visible; /* 수정된 부분 */
-}
-.back {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  backface-visibility: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 1.0;
-  visibility: hidden; /* 수정된 부분 */
-
-
-}
-    .card.flipped {
-      transform: rotateY(540deg);
-	    visibility: visible; /* 수정된 부분 */
-
+      bottom: 0;
     }
 
+    .reel {
+      width: 100%;
+      height: 100%;
+      transform: translateY(0);
+    }
 
+    .reel img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
 
-.card.flipped .front {
-  visibility: visible; /* 추가된 부분: 플립된 후에 보이도록 설정 */
-  transform: rotateY(0deg);
-}
-.card.flipped .back {
-  visibility: visible; /* 추가된 부분: 플립된 후에 보이도록 설정 */
-  transform: rotateY(540deg);
-}
+    .start-button,
+    .stop-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
 
-
+    .slots-container {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 5px;
+    }
   </style>
 </head>
-
 <body>
-  <div class="high">
-    <p>
-      🧡 크리스마스 🧡 <br> 꽝 없는 300개 트리 뽑기
-    </p>
+
+  <div class="slots-container">
+    <div class="slot" id="reel1">
+      <div class="reel-container">
+        <div class="reel">
+          <img src="1.png" alt="1">
+        </div>
+      </div>
+    </div>
+
+    <div class="slot" id="reel2">
+      <div class="reel-container">
+        <div class="reel">
+          <img src="1.png" alt="1">
+        </div>
+      </div>
+    </div>
+
+    <div class="slot" id="reel3">
+      <div class="reel-container">
+        <div class="reel">
+          <img src="1.png" alt="1">
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="center-container">
-    <div class="grid-container" id="gridContainer"></div>
+
+  <!-- 시작 및 정지 버튼 및 효과음 추가 -->
+  <div class="slots-container">
+    <button class="start-button" onclick="startSpin('reel1')">시작</button>
+    <button class="stop-button" onclick="stopSpin('reel1')">정지</button>
+
+    <audio id="spinSound" src="spin_sound.mp3" loop></audio>
   </div>
-  <p id="result"></p>
 
   <script>
-    var 당첨숫자들 = [];
-    var 선택된칸들 = [];
+    let isSpinning = false;
+    const reels = document.querySelectorAll('.reel');
+	const spinSound = document.getElementById('spinSound');
+    const images = [];
 
-    function 칸클릭(칸번호) {
-      if (선택된칸들.includes(칸번호)) {
-        return;
+    // 이미지 추가
+    for (let i = 1; i <= 12; i++) {
+      images.push(`${i}.png`);
+    }
+
+    function randomSpeed() {
+      return Math.random() * 3.7 + 0.3; // 랜덤한 0.3~4 사이의 숫자 반환
+    }
+
+    function startSpin() {
+      if (!isSpinning) {
+	       spinSound.play();
+        reels.forEach((reel, index) => {
+          // Clear the content of each reel
+          reel.innerHTML = '';
+
+          // Add images to each reel
+          images.forEach(imgSrc => {
+            const img = document.createElement('img');
+            img.src = imgSrc;
+            img.alt = imgSrc;
+            reel.appendChild(img);
+          });
+
+          // Add an additional image to each reel
+          const additionalImg = document.createElement('img');
+          additionalImg.src = '1.png';
+          additionalImg.alt = '1';
+          reel.appendChild(additionalImg);
+
+          // Initialize
+          reel.innerHTML = reel.innerHTML;
+
+          // Reset animation for each reel
+          reel.style.animation = 'none';
+          void reel.offsetWidth; // Trigger reflow
+          reel.style.animation = `spin ${randomSpeed()}s infinite linear`; // Use random speed
+
+          // Start the animation for each reel
+          reel.style.animationPlayState = 'running';
+        });
+
+        isSpinning = true;
       }
+    }
 
-      선택된칸들.push(칸번호);
-      var gridItem = document.getElementById("gridItem_" + 칸번호);
+    function stopSpin() {
+      if (isSpinning) {
+	       spinSound.pause();
+        reels.forEach((reel, index) => {
+          // Pause the animation for each reel
+          reel.style.animationPlayState = 'paused';
 
-      if (!gridItem) {
-        console.error(`칸번호 ${칸번호}에 해당하는 gridItem을 찾을 수 없습니다.`);
-        return;
-      }
+          // Get the current translation position
+          const computedStyle = window.getComputedStyle(reel);
+          const translateY = parseInt(computedStyle.transform.split(',')[5], 10);
 
-      var card = gridItem.querySelector('.card');
+          // Find the closest 12 positions
+          let closestPosition = 0;
+          let closestDistance = Math.abs(translateY + 660);
 
-      if (!card) {
-        console.error(`칸번호 ${칸번호}에 해당하는 card를 찾을 수 없습니다.`);
-        return;
-      }
+          for (let i = 1; i <= 11; i++) {
+            const position = -110 * i;
+            const distance = Math.abs(translateY - position);
+            if (distance < closestDistance) {
+              closestPosition = position;
+              closestDistance = distance;
+            }
+          }
 
-   // 플립 소리 재생
-  playFlipSound();
+          // Change to the image at the found position
+          const positionIndex = Math.abs(closestPosition / 110) + 1;
 
-  card.classList.add('flipped');
+          // Image loading successful
+          const newImage = new Image();
+          newImage.onload = function () {
+            // Remove animation properties
+            reel.style.animation = 'none';
 
-      // 결과 텍스트 가져오기
-      var 결과텍스트 = cardResults[칸번호 - 1];
+            // Adjust the position of the slot area and image
+            reel.style.overflow = 'block';
 
-      if (당첨숫자들.length === 30) {
-        document.querySelectorAll('.grid-item').forEach(function (item) {
-          item.removeAttribute('onclick');
+            const reelContainer = reel.parentElement;
+            reelContainer.style.position = 'absolute';
+            reelContainer.style.bottom = '0';
+
+            // Add the image to the reel
+            reel.innerHTML = '';
+            reel.appendChild(newImage);
+
+            isSpinning = false;
+          };
+
+          newImage.onerror = function () {
+            // Image loading failed
+            console.error('이미지 로드에 실패했습니다.');
+          };
+
+          // Set the image source
+          newImage.src = images[positionIndex - 1];
+          newImage.alt = `${positionIndex}`;
         });
       }
     }
-
-    var gridContainer = document.getElementById("gridContainer");
-    var cardImages = ["0.png", "0.png", "1.png", "2.png", "0.png", "0.png", "0.png", "0.png", "3.png", "4.png", "0.png", "0.png", "0.png", "5.png", "6.png", "7.png", "8.png", "0.png", "0.png", "9.png", "10.png", "11.png", "12.png", "0.png", "0.png", "13.png", "14.png", "15.png", "16.png", "0.png"];
-    var cardResults = ["21.png", "22.png", "21.png", "22.png", "23.png", "24.png", "25.png", "28.png", "23.png", "24.png", "32.png", "33.png", "34.png", "25.png", "28.png", "27.png", "28.png", "27.png", "28.png", "29.png", "30.png", "31.png", "32.png", "29.png", "30.png", "33.png", "34.png", "35.png", "36.png", "31.png"];
-
-    var randomOrder = Array.from(cardResults).sort(() => Math.random() - 0.5);
-    for (var i = 1; i <= cardImages.length; i++) {
-      var gridItem = document.createElement("div");
-      gridItem.id = "gridItem_" + i;
-      gridItem.className = "grid-item";
-
-      var card = document.createElement("div");
-      card.className = "card";
-
-      var front = document.createElement("img");
-      front.className = "front";
-      front.src = cardImages[i - 1];
-
-      var back = document.createElement("img");
-      back.className = "back";
-      back.src = cardResults[i - 1];
- //     back.style.transform = "scaleX(-1)";
-
-      // 특정 그리드 아이템에 항상 '0.png' 설정
-      if ([1, 2, 5, 6, 7, 8, 11, 12, 13, 18, 19, 24, 25, 30].includes(i)) {
-        back.src = '0.png';
-      } else {
-        // 그 외의 경우 랜덤한 이미지 설정
-        back.src = randomOrder[i - 1];
-      }
-
-      card.appendChild(front);
-      card.appendChild(back);
-      gridItem.appendChild(card);
-
-      if ([1, 2, 5, 6, 7, 8, 11, 12, 13, 18, 19, 24, 25, 30].includes(i)) {
-        gridItem.classList.add("unclickable");
-      } else {
-        gridItem.setAttribute("onclick", "칸클릭(" + i + ")");
-      }
-
-      gridContainer.appendChild(gridItem);
-    }
-
-    document.querySelectorAll('.card').forEach(function (card) {
-      card.addEventListener('transitionend', function () {
-        if (card.classList.contains('flipped')) {
-          card.querySelector('.back').style.visibility = 'visible';
-        }
-      }, {
-        once: true
-      });
-    });
-
-function playFlipSound() {
-  // 플립 소리 파일 경로
-  var flipSoundFile = 'yes.mp3'; // 적절한 경로로 변경
-  var audio = new Audio(flipSoundFile);
-  audio.play();
-}  </script>
+  </script>
 </body>
-
 </html>
