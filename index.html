@@ -182,10 +182,10 @@
 
             // Find the closest 12 positions
             let closestPosition = 0;
-            let closestDistance = Math.abs(translateY + 660);
+            let closestDistance = Math.abs(translateY + 900);
 
             for (let i = 1; i <= 11; i++) {
-              const position = -110 * i;
+              const position = -150 * i;
               const distance = Math.abs(translateY - position);
               if (distance < closestDistance) {
                 closestPosition = position;
@@ -194,7 +194,7 @@
             }
 
             // Change to the image at the found position
-            const positionIndex = Math.abs(closestPosition / 110) + 1;
+            const positionIndex = Math.abs(closestPosition / 150) + 1;
 
             // Image loading successful
             const newImage = new Image();
