@@ -11,24 +11,24 @@
   }
     @keyframes spin {
       0% { transform: translateY(0px); }
-      8.33% { transform: translateY(-100px); }
-      16.67% { transform: translateY(-200px); }
-      25% { transform: translateY(-300px); }
-      33.33% { transform: translateY(-400px); }
-      41.67% { transform: translateY(-500px); }
-      50% { transform: translateY(-600px); }
-      58.33% { transform: translateY(-700px); }
-      66.67% { transform: translateY(-800px); }
-      75% { transform: translateY(-900px); }
-      83.33% { transform: translateY(-1000px); }
-      91.67% { transform: translateY(-1100px); }
-      100% { transform: translateY(-1200px); } 
+      8.33% { transform: translateY(-120px); }
+      16.67% { transform: translateY(-240px); }
+      25% { transform: translateY(-360px); }
+      33.33% { transform: translateY(-480px); }
+      41.67% { transform: translateY(-600px); }
+      50% { transform: translateY(-720px); }
+      58.33% { transform: translateY(-840px); }
+      66.67% { transform: translateY(-960px); }
+      75% { transform: translateY(-1080px); }
+      83.33% { transform: translateY(-1200px); }
+      91.67% { transform: translateY(-1320px); }
+      100% { transform: translateY(-1440px); } 
     }
 
     .slot {
       background-color: white; /* 슬롯 배경을 흰색으로 설정 */
-      width: 100px;
-      height: 100px;
+      width: 120px;
+      height: 120px;
       overflow: hidden;
       border: 1px solid #ccc;
       position: relative;
@@ -36,7 +36,7 @@
     }
 
     .reel-container {
-      height: 100px;
+      height: 120px;
       overflow: hidden;
       position: absolute;
       bottom: 0;
@@ -55,18 +55,26 @@
     }
 
     .start-button,
-    .stop-button {
-      margin-top: 10px;
+    .stop-button,
+    .auto-button{
+      margin-top: 0px;
       padding: 0px 10px;
-      width: 110px;
+      width: 120px;
       height: 35px;
-      font-size: 20px;
+      font-size: 23px;
       cursor: pointer;
     }
 
     .slots-container {
-      width: 350px;
-      height: 100px;
+      width: 390px;
+      height: 125px;
+      display: flex;
+      justify-content: space-around;
+      margin-top: 5px;
+    }
+	.button-container {
+      width: 390px;
+      height: 40px;
       display: flex;
       justify-content: space-around;
       margin-top: 5px;
@@ -152,13 +160,15 @@
   </div>
 
  <!-- 시작 및 정지 버튼 및 효과음 추가 -->
-  <div class="slots-container">
-  <div>
+  <div class="button-container">
     <button class="stop-button" onclick="stopSpin('reel1','reel4','reel7')">정지</button>
     <button class="stop-button" onclick="stopSpin('reel2','reel5','reel8')">정지</button>
     <button class="stop-button" onclick="stopSpin('reel3','reel6','reel9')">정지</button>
-  <div> <center>   <button class="start-button" onclick="startSpin('reel1', 'reel2', 'reel3', 'reel4', 'reel5', 'reel6', 'reel7', 'reel8', 'reel9')">시작</button>
-  </div>  </div>
+  </div>
+  <div class="button-container">
+  <button class="start-button" onclick="startSpin('reel1', 'reel2', 'reel3', 'reel4', 'reel5', 'reel6', 'reel7', 'reel8', 'reel9')">시작</button>
+  <button class="auto-button" onclick="startAuto()('reel1', 'reel2', 'reel3', 'reel4', 'reel5', 'reel6', 'reel7', 'reel8', 'reel9')">자동</button>
+  </div>
     <audio id="spinSound" src="spin_sound.mp3" loop></audio>
   </div>
 
@@ -215,7 +225,29 @@
         isSpinning = true;
       }
     }
+function startAuto() {
+  // 랜덤한 시간(3~5초) 후에 stopSpin을 호출하는 함수
+  function stopAfterRandomTime(reel1, reel2, reel3, reel4, reel5, reel6, reel7, reel8, reel9) {
+    const randomTime = Math.random() * (7000 - 1000) + 3000; // 3000~5000ms 사이의 랜덤 시간
+    setTimeout(() => {
+      stopSpin(reel1, reel2, reel3);
+    }, randomTime);
+  }
 
+  // 오토 실행, 여기서는 랜덤하게 선택된 릴들을 사용
+  startSpin('reel1', 'reel2', 'reel3', 'reel4', 'reel5', 'reel6', 'reel7', 'reel8', 'reel9');
+
+  // 랜덤한 시간(3~5초) 후에 각각의 정지를 호출
+  stopAfterRandomTime('reel1');
+  stopAfterRandomTime('reel2');
+  stopAfterRandomTime('reel3');
+  stopAfterRandomTime('reel4');
+  stopAfterRandomTime('reel5');
+  stopAfterRandomTime('reel6');
+  stopAfterRandomTime('reel7');
+  stopAfterRandomTime('reel8');
+  stopAfterRandomTime('reel9');
+}
     function stopSpin(reelId1, reelId2, reelId3) {
       if (isSpinning) {
    //     spinSound.pause();
@@ -231,10 +263,10 @@
 
             // Find the closest 12 positions
             let closestPosition = 0;
-            let closestDistance = Math.abs(translateY + 660);
+            let closestDistance = Math.abs(translateY + 720);
 
             for (let i = 1; i <= 11; i++) {
-              const position = -110 * i;
+              const position = -120 * i;
               const distance = Math.abs(translateY - position);
               if (distance < closestDistance) {
                 closestPosition = position;
@@ -243,7 +275,7 @@
             }
 
             // Change to the image at the found position
-            const positionIndex = Math.abs(closestPosition / 110) + 1;
+            const positionIndex = Math.abs(closestPosition / 120) + 1;
 
             // Image loading successful
             const newImage = new Image();

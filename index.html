@@ -57,10 +57,12 @@
     }
 
     .start-button,
-    .stop-button {
-      margin-top: 20px;
-      padding: 0px 15px;
-      width: 150px;
+    .stop-button, 
+    .auto-button{
+
+      margin-top: 8px;
+      padding: 0px 17px;
+      width: 152px;
       height: 35px;
       font-size: 20px;
       cursor: pointer;
@@ -73,6 +75,13 @@
       justify-content: space-around;
       margin-top: 5px;
     }
+	.button-container {
+      width: 480px;
+      height: 100px;
+      display: flex;
+      justify-content: space-around;
+      margin-top: 5px;
+
   </style>
 </head>
 <body>
@@ -104,12 +113,13 @@
   </div>
 
  <!-- 시작 및 정지 버튼 및 효과음 추가 -->
-  <div class="slots-container">
+  <div class="button-container">
   <div>
     <button class="stop-button" onclick="stopSpin('reel1')">정지</button>
     <button class="stop-button" onclick="stopSpin('reel2')">정지</button>
     <button class="stop-button" onclick="stopSpin('reel3')">정지</button>
   <div> <center>   <button class="start-button" onclick="startSpin('reel1', 'reel2', 'reel3')">시작</button>
+    <button class="auto-button" onclick="startAuto()('reel1', 'reel2', 'reel3')">자동</button>
   </div>  </div>
     <audio id="spinSound" src="spin_sound.mp3" loop></audio>
   </div>
@@ -128,7 +138,7 @@
 
 	 function randomSpeed() {
   const minSpeed = 4; // 최소값
-  return Math.random() * (5 - minSpeed) + 1;
+  return Math.random() * (6 - minSpeed) + 1;
 }
 
 
@@ -170,6 +180,24 @@
         isSpinning = true;
       }
     }
+
+function startAuto() {
+  // 랜덤한 시간(3~5초) 후에 stopSpin을 호출하는 함수
+  function stopAfterRandomTime(reel1, reel2, reel3) {
+    const randomTime = Math.random() * (5000 - 1000) + 3000; // 3000~5000ms 사이의 랜덤 시간
+    setTimeout(() => {
+      stopSpin(reel1, reel2, reel3);
+    }, randomTime);
+  }
+
+  // 오토 실행, 여기서는 랜덤하게 선택된 릴들을 사용
+  startSpin('reel1', 'reel2', 'reel3');
+
+  // 랜덤한 시간(3~5초) 후에 각각의 정지를 호출
+  stopAfterRandomTime('reel1');
+  stopAfterRandomTime('reel2');
+  stopAfterRandomTime('reel3');
+}
 
     function stopSpin(reelId) {
       if (isSpinning) {
