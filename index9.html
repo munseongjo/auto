@@ -79,6 +79,21 @@
       justify-content: space-around;
       margin-top: 5px;
     }
+    /* 추가된 부분 */
+  .blinking {
+    animation: blinkBorder 4.5s infinite alternate;
+
+  }
+
+@keyframes blinkBorder {
+  0% { border-color: #FF00FF; } /* 마젠타 */
+  25% { border-color: #00FF00; } /* 라임 그린 */
+  50% { border-color: #FFD700; } /* 금색 */
+  75% { border-color: #FF4500; } /* 오렌지 레드 */
+  100% { border-color: #00FFFF; } /* 시안 */
+}
+
+
   </style>
 </head>
 <body>
@@ -192,6 +207,11 @@
       if (!isSpinning) {
         spinCount = 0; // 새로운 스핀 시작 시 카운터 초기화
         spinSound.play();
+
+    document.querySelectorAll('.slot').forEach(slot => {
+      slot.classList.add('blinking');
+    });
+
         reels.forEach((reel, index) => {
           // Clear the content of each reel
           reel.innerHTML = '';
@@ -299,6 +319,11 @@ function startAuto() {
             if (spinCount === 9) {
               isSpinning = false;
               spinSound.pause();
+
+				document.querySelectorAll('.slot').forEach(slot => {
+                  slot.classList.remove('blinking');
+                });
+
               startButton.disabled = false; // 모든 릴이 정지된 후에 시작 버튼 다시 활성화
             }
           };
