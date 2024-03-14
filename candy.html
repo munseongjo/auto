@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>슬롯머신</title>
+  <style>
+    body {
+    background-color: transparent; /* HTML 배경을 투명하게 설정 */
+    margin: 0; /* Body의 기본 마진 제거 */
+  }
+    @keyframes spin {
+      0% { transform: translateY(0px); }
+      8.33% { transform: translateY(-120px); }
+      16.67% { transform: translateY(-240px); }
+      25% { transform: translateY(-360px); }
+      33.33% { transform: translateY(-480px); }
+      41.67% { transform: translateY(-600px); }
+      50% { transform: translateY(-720px); }
+      58.33% { transform: translateY(-840px); }
+      66.67% { transform: translateY(-960px); }
+      75% { transform: translateY(-1080px); }
+      83.33% { transform: translateY(-1200px); }
+      91.67% { transform: translateY(-1320px); }
+      100% { transform: translateY(-1440px); } 
+    }
+
+    .slot {
+      background-color: white; /* 슬롯 배경을 흰색으로 설정 */
+      width: 120px;
+      height: 120px;
+      overflow: hidden;
+      border: 2px solid #ccc;
+      position: relative;
+      margin: 0 auto;
+    }
+
+    .reel-container {
+      height: 120px;
+      overflow: hidden;
+      position: absolute;
+      bottom: 0;
+    }
+
+    .reel {
+      width: 100%;
+      height: 100%;
+      transform: translateY(0);
+    }
+
+    .reel img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .start-button,
+    .stop-button,
+    .auto-button{
+      margin-top: 0px;
+      padding: 0px 10px;
+      width: 120px;
+      height: 35px;
+      font-size: 23px;
+      cursor: pointer;
+    }
+
+    .slots-container {
+      width: 390px;
+      height: 125px;
+      display: flex;
+      justify-content: space-around;
+      margin-top: 5px;
+    }
+	.button-container {
+      width: 390px;
+      height: 40px;
+      display: flex;
+      justify-content: space-around;
+      margin-top: 5px;
+    }
+    /* 추가된 부분 */
+  .blinking {
+    animation: blinkBorder 4.5s infinite alternate;
+
+  }
+
+@keyframes blinkBorder {
+  0% { border-color: #FF00FF; } /* 마젠타 */
+  25% { border-color: #00FF00; } /* 라임 그린 */
+  50% { border-color: #FFD700; } /* 금색 */
+  75% { border-color: #FF4500; } /* 오렌지 레드 */
+  100% { border-color: #00FFFF; } /* 시안 */
+}
+
+
+  </style>
+</head>
+<body>
+
+  <div class="slots-container">
+    <div class="slot" id="reel1">
+      <div class="reel-container">
+        <div class="reel" id="reel1">
+          <img src="c0.png" alt="0">
+        </div>
+      </div>
+    </div>
+
+    <div class="slot" id="reel2">
+      <div class="reel-container">
+        <div class="reel" id="reel2">
+          <img src="c0.png" alt="0">
+        </div>
+      </div>
+    </div>
+
+    <div class="slot" id="reel3">
+      <div class="reel-container">
+        <div class="reel" id="reel3">
+          <img src="c0.png" alt="0">
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="slots-container">
+    <div class="slot" id="reel4">
+      <div class="reel-container">
+        <div class="reel" id="reel4">
+          <img src="c0.png" alt="0">
+        </div>
+      </div>
+    </div>
+
+    <div class="slot" id="reel5">
+      <div class="reel-container">
+        <div class="reel" id="reel5">
+          <img src="c0.png" alt="0">
+        </div>
+      </div>
+    </div>
+
+    <div class="slot" id="reel6">
+      <div class="reel-container">
+        <div class="reel" id="reel6">
+          <img src="c0.png" alt="0">
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="slots-container">
+    <div class="slot" id="reel7">
+      <div class="reel-container">
+        <div class="reel" id="reel7">
+          <img src="c0.png" alt="0">
+        </div>
+      </div>
+    </div>
+
+    <div class="slot" id="reel8">
+      <div class="reel-container">
+        <div class="reel" id="reel8">
+          <img src="c0.png" alt="0">
+        </div>
+      </div>
+    </div>
+
+    <div class="slot" id="reel9">
+      <div class="reel-container">
+        <div class="reel" id="reel9">
+          <img src="c0.png" alt="0">
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <!-- 시작 및 정지 버튼 및 효과음 추가 -->
+  <div class="button-container">
+    <button class="stop-button" onclick="stopSpin('reel1','reel4','reel7')">정지</button>
+    <button class="stop-button" onclick="stopSpin('reel2','reel5','reel8')">정지</button>
+    <button class="stop-button" onclick="stopSpin('reel3','reel6','reel9')">정지</button>
+  </div>
+  <div class="button-container">
+  <button class="start-button" onclick="startSpin('reel1', 'reel2', 'reel3', 'reel4', 'reel5', 'reel6', 'reel7', 'reel8', 'reel9')">시작</button>
+  <button class="auto-button" onclick="startAuto()('reel1', 'reel2', 'reel3', 'reel4', 'reel5', 'reel6', 'reel7', 'reel8', 'reel9')">자동</button>
+  </div>
+    <audio id="spinSound" src="spin_sound.mp3" loop></audio>
+  </div>
+
+ <script>
+    let isSpinning = false;
+    let spinCount = 0; // 정지 호출 횟수
+    const reels = document.querySelectorAll('.reel');
+	const spinSound = document.getElementById('spinSound');
+    const images = [];
+
+    // 이미지 추가
+    for (let i = 1; i <= 12; i++) {
+      images.push(`c${i}.png`);
+    }
+
+    function randomSpeed() {
+      return Math.random() * 2.0 + 0.1; // 랜덤한 0.3~4 사이의 숫자 반환
+    }
+
+    function startSpin() {
+      if (!isSpinning) {
+        spinCount = 0; // 새로운 스핀 시작 시 카운터 초기화
+        spinSound.play();
+
+    document.querySelectorAll('.slot').forEach(slot => {
+      slot.classList.add('blinking');
+    });
+
+        reels.forEach((reel, index) => {
+          // Clear the content of each reel
+          reel.innerHTML = '';
+
+          // Add images to each reel
+          images.forEach(imgSrc => {
+            const img = document.createElement('img');
+            img.src = imgSrc;
+            img.alt = imgSrc;
+            reel.appendChild(img);
+          });
+
+          // Add an additional image to each reel
+          const additionalImg = document.createElement('img');
+          additionalImg.src = '1.png';
+          additionalImg.alt = '1';
+          reel.appendChild(additionalImg);
+
+          // Initialize
+          reel.innerHTML = reel.innerHTML;
+
+          // Reset animation for each reel
+          reel.style.animation = 'none';
+          void reel.offsetWidth; // Trigger reflow
+          reel.style.animation = `spin ${randomSpeed()}s infinite linear`; // Use random speed
+
+          // Start the animation for each reel
+          reel.style.animationPlayState = 'running';
+        });
+
+        isSpinning = true;
+      }
+    }
+function startAuto() {
+  // 랜덤한 시간(3~5초) 후에 stopSpin을 호출하는 함수
+  function stopAfterRandomTime(reel1, reel2, reel3, reel4, reel5, reel6, reel7, reel8, reel9) {
+    const randomTime = Math.random() * (7000 - 1000) + 3000; // 3000~5000ms 사이의 랜덤 시간
+    setTimeout(() => {
+      stopSpin(reel1, reel2, reel3);
+    }, randomTime);
+  }
+
+  // 오토 실행, 여기서는 랜덤하게 선택된 릴들을 사용
+  startSpin('reel1', 'reel2', 'reel3', 'reel4', 'reel5', 'reel6', 'reel7', 'reel8', 'reel9');
+
+  // 랜덤한 시간(3~5초) 후에 각각의 정지를 호출
+  stopAfterRandomTime('reel1');
+  stopAfterRandomTime('reel2');
+  stopAfterRandomTime('reel3');
+  stopAfterRandomTime('reel4');
+  stopAfterRandomTime('reel5');
+  stopAfterRandomTime('reel6');
+  stopAfterRandomTime('reel7');
+  stopAfterRandomTime('reel8');
+  stopAfterRandomTime('reel9');
+}
+    function stopSpin(reelId1, reelId2, reelId3) {
+      if (isSpinning) {
+   //     spinSound.pause();
+    const stopReels = [reelId1, reelId2, reelId3];
+        reels.forEach((reel, index) => {
+          // Pause the animation for the selected reel only
+          if (stopReels.includes(reel.id)) {
+            reel.style.animationPlayState = 'paused';
+
+            // Get the current translation position
+            const computedStyle = window.getComputedStyle(reel);
+            const translateY = parseInt(computedStyle.transform.split(',')[5], 10);
+
+            // Find the closest 12 positions
+            let closestPosition = 0;
+            let closestDistance = Math.abs(translateY + 720);
+
+            for (let i = 1; i <= 11; i++) {
+              const position = -120 * i;
+              const distance = Math.abs(translateY - position);
+              if (distance < closestDistance) {
+                closestPosition = position;
+                closestDistance = distance;
+              }
+            }
+
+            // Change to the image at the found position
+            const positionIndex = Math.abs(closestPosition / 120) + 1;
+
+            // Image loading successful
+            const newImage = new Image();
+            newImage.onload = function () {
+              // Remove animation properties
+              reel.style.animation = 'none';
+
+              // Adjust the position of the slot area and image
+              reel.style.overflow = 'block';
+
+              const reelContainer = reel.parentElement;
+              reelContainer.style.position = 'absolute';
+              reelContainer.style.bottom = '0';
+
+              // Add the image to the reel
+              reel.innerHTML = '';
+              reel.appendChild(newImage);
+
+            spinCount++;
+
+            if (spinCount === 9) {
+              isSpinning = false;
+              spinSound.pause();
+
+				document.querySelectorAll('.slot').forEach(slot => {
+                  slot.classList.remove('blinking');
+                });
+
+              startButton.disabled = false; // 모든 릴이 정지된 후에 시작 버튼 다시 활성화
+            }
+          };
+
+            newImage.onerror = function () {
+              // Image loading failed
+              console.error('이미지 로드에 실패했습니다.');
+            };
+
+            // Set the image source
+            newImage.src = images[positionIndex - 1];
+            newImage.alt = `${positionIndex}`;
+          }
+        });
+      }
+    }
+  </script>
+</body>
+</html>
